@@ -1,8 +1,7 @@
-import { intro } from "@/lib/intro";
+import { intro } from "@/data/intro";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/lib/projects";
 
 export default function Home() {
   return (
@@ -20,7 +19,7 @@ export default function Home() {
       <div className="m-5 sm:m-20 text-center font-raleway">
         <ReactMarkdown>{intro}</ReactMarkdown>
       </div>
-      <div className="grid grid-cols-3 gap-6 mx-4">
+      {/* <div className="grid grid-cols-3 gap-6 mx-4">
         {projects.map((project) => (
           <Link
             href={`/projects/${project.slug}`}
@@ -43,7 +42,7 @@ export default function Home() {
             </div>
           </Link>
         ))}
-      </div>
+      </div> */}
       
     </div>
   );

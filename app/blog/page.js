@@ -3,7 +3,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { blogs } from "@/lib/blogs";
+import { blogs } from "@/data/blogs";
 
 export default function BlogListPage() {
   return (

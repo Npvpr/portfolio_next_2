@@ -1,6 +1,6 @@
 // app/blog/[slug]/page.js
 import { notFound } from 'next/navigation';
-import { blogs } from '@/lib/blogs';
+import { blogs } from '@/data/blogs';
 import Image from 'next/image';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';

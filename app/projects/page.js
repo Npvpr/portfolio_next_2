@@ -3,37 +3,60 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { projects } from "@/lib/projects";
+import { useState, useEffect } from "react";
 
-export default function ProjectListPage() {
+export default function ProjectsPage() {
+
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    async function fetchNotionProjects() {
+      try {
+        const res = await fetch('/api/projects');
+        const json = await res.json();
+        setProjects(json);
+      } catch (err) {
+        console.error('Fetch failed:', err);
+      }
+    }
+    
+    fetchNotionProjects();
+  }, []);
+
+  useEffect(() => {
+  console.log("Projects updated:", projects);
+}, [projects]);
+
+
   return (
     <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-4xl font-bold mb-8"> Projects </h1>
       <div className="grid grid-cols-2 gap-6">
-        {projects.map((project) => (
+        {projects.map((project, i) => (
           <Link
-            href={`/projects/${project.slug}`}
-            key={project.slug}
+            href={`/projects/${project.id}`}
+            key={i}
             className="block border rounded p-4 hover:shadow-lg transition "
           >
             <h2 className="text-2xl font-semibold text-center mb-2">
-              {project.title}
+              {project.name}
             </h2>
             <div className="grid grid-cols-1 ">
+              {project.image &&
               <Image
                 src={project.image}
-                alt={project.title}
+                alt={project.name}
                 width={800}
                 height={400}
                 className="rounded"
-              />
+              />}
 
-              {project.releaseDate?.length > 0 && (
+              {project.id?.length > 0 && (
                 <p className="mt-2 text-white grid grid-cols-2 gap-1">
                   <span className="font-bold flex justify-end">
                     Release Date:
                   </span>
-                  <span> {project.releaseDate}</span>
+                  <span> {project.id}</span>
                 </p>
               )}
 

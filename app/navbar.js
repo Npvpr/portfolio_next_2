@@ -17,7 +17,7 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="bg-black text-white px-2 sm:px-20 py-4  pb-8 flex justify-between items-center relative">
+    <nav className="sticky top-0 z-50 bg-black text-white px-2 sm:px-20 py-4 pb-8 flex justify-between items-center relative">
       <Link href="/">
         <div className="text-xl font-bold font-raleway">
           Naing Lin Maung, Software Developer

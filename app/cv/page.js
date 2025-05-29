@@ -1,6 +1,6 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { cv } from "@/lib/cv";
+import { cv } from "@/data/cv";
 
 export default function CVPage() {
   return (
