@@ -4,10 +4,14 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import LoadingScreen from "../components/LoadingScreen";
 
 export default function ProjectsPage() {
 
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     async function fetchNotionProjects() {
@@ -15,88 +19,101 @@ export default function ProjectsPage() {
         const res = await fetch('/api/projects');
         const json = await res.json();
         setProjects(json);
+        setError(null);
       } catch (err) {
         console.error('Fetch failed:', err);
+        setError('Failed to load project. Please try again later!')
+      } finally {
+        setLoading(false);
       }
     }
-    
+
     fetchNotionProjects();
   }, []);
 
   useEffect(() => {
-  console.log("Projects updated:", projects);
-}, [projects]);
+    console.log("Projects updated:", projects);
+  }, [projects]);
 
+  if (error) {
+    return (
+      <div className="max-w-5xl mx-auto p-6 text-center text-red-500">
+        {error}
+      </div>
+    );
+  }
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-8"> Projects </h1>
-      <div className="grid grid-cols-2 gap-6">
-        {projects.map((project, i) => (
-          <Link
-            href={`/projects/${project.id}`}
-            key={i}
-            className="block border rounded p-4 hover:shadow-lg transition "
-          >
-            <h2 className="text-2xl font-semibold text-center mb-2">
-              {project.name}
-            </h2>
-            <div className="grid grid-cols-1 ">
-              {project.image &&
-              <Image
-                src={project.image}
-                alt={project.name}
-                width={800}
-                height={400}
-                className="rounded"
-              />}
+    <div className="max-w-full sm:mx-20 p-6">
+      <h1 className="text-4xl font-bold pr-4 mb-8"> Projects </h1>
+      {loading ? (<LoadingScreen />) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, i) => (
+            <Link
+              href={`/projects/${project.id}`}
+              key={i}
+              className="block border border-gray-500 rounded p-4 hover:shadow-lg transition "
+            >
+              <h2 className="text-2xl font-semibold text-center mb-2">
+                {project.name}
+              </h2>
+              <div className="grid grid-cols-1">
 
-              {project.id?.length > 0 && (
-                <p className="mt-2 text-white grid grid-cols-2 gap-1">
-                  <span className="font-bold flex justify-end">
-                    Release Date:
-                  </span>
-                  <span> {project.id}</span>
+                {isLoading && <LoadingScreen />}
+                {project.image &&
+                  <Image
+                    src={project.image}
+                    alt={project.name}
+                    width={800}
+                    height={400}
+                    className="rounded mb-4"
+                    onLoad={() => setIsLoading(false)}
+                  />}
+
+                {project.technologies?.length > 0 && (
+                  <p className="mt-2 text-white flex justify-start">
+                    <span className="font-bold pr-4">
+                      Technologies:
+                    </span>
+                    <span> {project.technologies}</span>
+                  </p>
+                )}
+
+                {project.languages?.length > 0 && (
+                  <p className="mt-2 text-white flex justify-start">
+                    <span className="font-bold pr-4">
+                      Programming Languages:
+                    </span>
+                    <span> {project.languages}</span>
+                  </p>
+                )}
+
+                {project.lastupdated?.length > 0 && (
+                  <p className="mt-2 text-white flex justify-start">
+                    <span className="font-bold pr-4">
+                      Last updated:
+                    </span>
+                    <span> {project.lastupdated} </span>
+                  </p>
+                )}
+
+                {project.description?.length > 0 && (
+                  <p className="mt-6 text-white flex justify-start">
+                    {/* <span className="font-bold pr-4">
+                      
+                    </span> */}
+                    <span>{project.description}</span>
+                  </p>
+                )}
+
+                <p className="mt-2 text-white">{project.snippet}</p>
+                <p className="mt-2 text-indigo-800 font-medium text-center">
+                  Click for more Info
                 </p>
-              )}
-
-              {project.platforms?.length > 0 && (
-                <p className="mt-2 text-white grid grid-cols-2 gap-1">
-                  <span className="font-bold flex justify-end">
-                    Platforms:{" "}
-                  </span>
-                  <span> {project.platforms}</span>
-                </p>
-              )}
-
-              {project.gameEngine?.length > 0 && (
-                <p className="mt-2 text-white grid grid-cols-2 gap-1">
-                  <span className="font-bold flex justify-end">
-                    Game Engine:{" "}
-                  </span>
-                  <span> {project.gameEngine}</span>
-                </p>
-              )}
-
-              {project.language?.length > 0 && (
-                <p className="mt-2 text-white grid grid-cols-2 gap-1">
-                  <span className="font-bold flex justify-end">
-                    {project.language.length > 1
-                      ? "Programming Language: "
-                      : "Programming Languages: "}
-                  </span>
-                  <span>{project.language}</span>
-                </p>
-              )}
-
-              <p className="mt-2 text-white">{project.snippet}</p>
-              <p className="mt-2 text-indigo-600 font-medium text-center">
-                More Info
-              </p>
-            </div>
-          </Link>
-        ))}
-      </div>
+              </div>
+            </Link>
+          ))}
+        </div>)}
     </div>
   );
 }

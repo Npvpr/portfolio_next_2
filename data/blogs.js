@@ -1,12 +1,12 @@
 export const blogs = [
-    {
-      slug: 'blog1',
-      title: 'How do you use neural networks in Unreal Engine?',
-      date: '9 June 2024',
-      tags: ['Game Dev', 'ML', 'Unreal Engine'],
-      image: '/Developer.png',
-      snippet: 'Learn how to integrate neural networks with Unreal...',
-      content: `
+  {
+    slug: 'blog1',
+    title: 'How do you use neural networks in Unreal Engine?',
+    date: '9 June 2024',
+    tags: ['Game Dev', 'ML', 'Unreal Engine'],
+    image: '/Developer.png',
+    snippet: 'Learn how to integrate neural networks with Unreal...',
+    content: `
   ## 🧠 Section 1: Gather Data
   
   - Obtain information from API
@@ -32,15 +32,14 @@ export const blogs = [
   
   [Learn more here](https://onnx.ai)
       `
-    },
-    {
-      slug: 'blog2',
-      title: 'AI Pathfinding in Game Development',
-      date: '21 May 2024',
-      tags: ['AI', 'Pathfinding', 'Games'],
-      image: '/images/blog2.png',
-      snippet: 'Explore how pathfinding algorithms work...',
-      content: `## Coming soon`
-    }
-  ];
-  
+  },
+  {
+    slug: 'blog2',
+    title: 'AI Pathfinding in Game Development',
+    date: '21 May 2024',
+    tags: ['AI', 'Pathfinding', 'Games'],
+    image: '/images/blog2.png',
+    snippet: 'Explore how pathfinding algorithms work...',
+    content: `## Coming soon`
+  }
+];
