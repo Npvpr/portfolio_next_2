@@ -15,6 +15,8 @@ export default async function NotionPage({ params }) {
   const notion = new NotionAPI();
   const recordMap = await notion.getPage(params.id);
 
+  console.log(params.id);
+
   return (
     <div>
       <NotionClientRenderer recordMap={recordMap} />
