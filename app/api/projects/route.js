@@ -26,7 +26,7 @@ export async function GET() {
       id: page.properties["Id"].rich_text[0]?.text?.content,
       name: page.properties["Name"].title[0]?.text?.content,
       image: page.properties["Image"].files[0]?.file?.url || "",
-      technologies: page.properties["Technologies"].rich_text[0]?.text?.content,
+      technologies: page.properties["Main Technologies"].rich_text[0]?.text?.content,
       languages: page.properties["Languages"].rich_text[0]?.text?.content,
       lastupdated: page.properties["Last Updated"].date?.start || null,
       description: page.properties["Description"].rich_text[0]?.text?.content,

@@ -4,7 +4,7 @@ import { cv } from "@/data/cv";
 
 export default function CVPage() {
   return (
-    <main className="bg-black text-white font-raleway p-6 max-w-2xl mx-auto prose prose-invert">
+    <main className="bg-zinc-900 text-white font-raleway p-6 max-w-2xl mx-auto prose prose-invert">
     <ReactMarkdown>{cv}</ReactMarkdown>
   </main>
   );

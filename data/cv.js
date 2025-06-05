@@ -35,29 +35,7 @@ I am a programmer, mainly focused on C++ and C#. Through both education and work
 
 ---
 
-## Education
 
-**BSc (Hons) Computer Games Development**  
-University of Westminster, UK (2020–2024)  
-Projects: AI agents, Pathfinding, Reinforcement learning, Game Engines, Graphics  
-
-**Game Development Ontario Advanced Diploma**  
-Algonquin College, Canada (2014–2018)  
-Projects: 2D/3D Game Engines, Project Management, AI, Shader Programming  
-
----
-
-## Projects
-
-**BSc (Hons) Computer Games Development**  
-University of Westminster, UK (2020–2024)  
-Projects: AI agents, Pathfinding, Reinforcement learning, Game Engines, Graphics  
-
-**Game Development Ontario Advanced Diploma**  
-Algonquin College, Canada (2014–2018)  
-Projects: 2D/3D Game Engines, Project Management, AI, Shader Programming  
-
----
 
 ## References
 
