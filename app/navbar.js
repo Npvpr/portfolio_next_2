@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
@@ -7,12 +7,46 @@ import { usePathname } from "next/navigation";
 const Navbar = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [home, setHome] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchNotionHome() {
+      try {
+        const res = await fetch("/api/home");
+        const json = await res.json();
+        setHome(json);
+        setError(null);
+      } catch (err) {
+        console.error("Fetch failed:", err);
+        setError("Failed to load home. Please try again later!");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchNotionHome();
+  }, []);
+
+  useEffect(() => {
+    console.log("Home updated:", home);
+  }, [home]);
+
+  if (error) {
+    return (
+      <div className="max-w-5xl mx-auto p-6 text-center text-red-500">
+        {error}
+      </div>
+    );
+  }
 
   const navLinks = [
     { name: "HOME", href: "/" },
     { name: "PROJECTS", href: "/projects" },
-    { name: "BLOG", href: "/blog" },
-    { name: "CV", href: "/cv" },
+    { name: "BLOGS", href: "/blogs" },
+    { name: "CV", href: home[0]?.file || ""},
     { name: "CONTACT", href: "/contact" },
   ];
 
@@ -30,9 +64,8 @@ const Navbar = () => {
           <Link
             key={link.name}
             href={link.href}
-            className={`hover:text-gray-400 relative inline-block text-white after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gray-400 after:transition-all after:duration-300 hover:after:w-full ${
-              pathname === link.href ? "after:w-full" : ""
-            }`}
+            className={`hover:text-gray-400 relative inline-block text-white after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gray-400 after:transition-all after:duration-300 hover:after:w-full ${pathname === link.href ? "after:w-full" : ""
+              }`}
           >
             <span className="font-raleway">{link.name}</span>
           </Link>
@@ -56,9 +89,8 @@ const Navbar = () => {
             <Link
               key={link.name}
               href={link.href}
-              className={`hover:text-gray-400 ${
-                pathname === link.href ? "text-red" : ""
-              }`}
+              className={`hover:text-gray-400 ${pathname === link.href ? "text-red" : ""
+                }`}
               onClick={() => setOpen(false)}
             >
               {link.name}

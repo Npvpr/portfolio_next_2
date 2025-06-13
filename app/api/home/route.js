@@ -2,32 +2,26 @@
 
 import { NextResponse } from 'next/server';
 import { Client } from '@notionhq/client';
+import { languages } from 'prismjs';
 
 const notion = new Client({
-  auth: process.env.NOTION_TOKEN,
+  auth: process.env.NEXT_PUBLIC_NOTION_TOKEN, // ⚠️ Keep secret in production
 });
 
-const databaseId = process.env.NOTION_DATABASE_ID;
+const databaseId = process.env.NEXT_PUBLIC_NOTION_HOME_DATABASE_ID;
 
 export async function GET() {
   try {
     const response = await notion.databases.query({
-      database_id: databaseId,
-      sorts: [
-        {
-          property: 'Order',
-          direction: 'ascending',
-        },
-      ],
+      database_id: databaseId
     });
 
     const result = response.results.map((page) => ({
-      id: page.properties.Id.rich_text[0]?.text?.content,
-      name: page.properties.Name.title[0]?.text?.content,
-      role: page.properties.Role.rich_text[0]?.text?.content,
-      image: page.properties.Image.files[0]?.file?.url || "",
+      name: page.properties["Name"].title[0]?.text?.content,
+      file: page.properties["File"].files[0]?.file?.url || "",
     }));
 
+    // console.log(response);
     return NextResponse.json(result);
   } catch (error) {
     console.error('Error:', error);

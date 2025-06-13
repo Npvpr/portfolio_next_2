@@ -8,7 +8,7 @@ const notion = new Client({
   auth: process.env.NEXT_PUBLIC_NOTION_TOKEN, // ⚠️ Keep secret in production
 });
 
-const databaseId = process.env.NEXT_PUBLIC_NOTION_PROJECTS_DATABASE_ID;
+const databaseId = process.env.NEXT_PUBLIC_NOTION_BLOGS_DATABASE_ID;
 
 export async function GET() {
   try {
@@ -24,12 +24,11 @@ export async function GET() {
 
     const result = response.results.map((page) => ({
       id: page.properties["Id"].rich_text[0]?.text?.content,
-      name: page.properties["Name"].title[0]?.text?.content,
-      image: page.properties["Image"].files[0]?.file?.url || "",
-      technologies: page.properties["Main Technologies"].rich_text[0]?.text?.content,
-      languages: page.properties["Languages"].rich_text[0]?.text?.content,
-      lastupdated: page.properties["Last Updated"].date?.start || null,
+      title: page.properties["Title"].title[0]?.text?.content,
       description: page.properties["Description"].rich_text[0]?.text?.content,
+      image: page.properties["Image"].files[0]?.file?.url || "",
+      tags: page.properties["Tags"].multi_select.map(tag => tag.name),
+      lastupdated: page.properties["Last Updated"].date?.start || null,
     }));
 
     // console.log(response);

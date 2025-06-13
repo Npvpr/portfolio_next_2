@@ -46,7 +46,7 @@ export default function ProjectsPage() {
     <div className="max-w-full sm:mx-20 p-6">
       <h1 className="text-4xl font-bold pr-4 mb-8"> Projects </h1>
       {loading ? (
-        <LoadingScreen />
+        <LoadingScreen className="min-h-screen"/>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
           {projects.map((project, i) => (
@@ -63,7 +63,7 @@ export default function ProjectsPage() {
                     alt={project.name}
                     width={800}
                     height={400}
-                    className="w-full h-40 object-cover"
+                    className="w-full h-50 object-cover"
                     onLoad={() => setIsLoading(false)}
                   />
                 )}

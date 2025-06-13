@@ -1,3 +1,4 @@
+// app/blog/[id]/page.js
 import NotionClientRenderer from '@/app/components/NotionRenderer';
 
 import 'react-notion-x/src/styles.css';
@@ -5,7 +6,7 @@ import 'react-notion-x/src/styles.css';
 import 'prismjs/themes/prism-tomorrow.css';
 import { NotionAPI } from 'notion-client';
 
-export default async function ProjectDetail({ params }) {
+export default async function BlogDetail({ params }) {
 
   // Without this:
   // Error: Route "/projects/[id]" used `params.id`. `params` should be awaited before using its properties. 

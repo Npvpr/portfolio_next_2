@@ -1,23 +1,28 @@
-import { intro } from "@/data/intro";
-import ReactMarkdown from "react-markdown";
 import Link from "next/link";
 import Image from "next/image";
+import NotionClientRenderer from "./components/NotionRenderer";
+import { NotionAPI } from "notion-client";
 
-export default function Home() {
+export default async function Home() {
+  const notion = new NotionAPI();
+  const recordMap = await notion.getPage("2115b1c9508a800ea0a2e804b5461acd");
+
   return (
-    <div>
+    <div className="">
       <div
-        className="h-[70vh] bg-fixed sm:bg-cover bg-contain bg-center flex items-center justify-center text-white text-4xl font-bold"
+        className="h-[70vh] bg-fixed sm:bg-cover bg-center bg-no-repeat bg-cover flex items-center justify-center text-white text-4xl font-bold"
         style={{
-          backgroundImage: "url('/Developer.png')",
+          backgroundImage: "url('/bg.jpg')",
         }}
       >
         <h1 className="text-white sm:text-5xl font-raleway font-bold text-center">
           Naing Lin Maung - Software Developer
         </h1>
       </div>
-      <div className="m-5 sm:m-20 text-center font-raleway">
-        <ReactMarkdown>{intro}</ReactMarkdown>
+      <div className="flex justify-center">
+        <div className="max-w-5xl mx-7 mt-10">
+          <NotionClientRenderer recordMap={recordMap} />
+        </div>
       </div>
       {/* <div className="grid grid-cols-3 gap-6 mx-4">
         {projects.map((project) => (

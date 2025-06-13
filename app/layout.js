@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
 
         <Navbar />
         {children}
-        <footer className="text-gray-500 text-center mt-16 mb-5">
+        <footer className="text-gray-500 text-center mt-5 mb-5">
           Copyright © 2025 Naing Lin Maung - All Rights Reserved. All content
           and trademarks property of their respective owners.{" "}
         </footer>
