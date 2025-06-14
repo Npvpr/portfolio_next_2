@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./navbar";
+import { SiGmail } from "react-icons/si";
+import { FaGithub, FaLinkedin  } from "react-icons/fa";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,10 +31,31 @@ export default function RootLayout({ children }) {
         />
 
         <Navbar />
-        {children}
+        <div className="min-h-[78vh]">
+          {children}
+        </div>
         <footer className="text-gray-500 text-center mt-5 mb-5">
-          Copyright © 2025 Naing Lin Maung - All Rights Reserved. All content
-          and trademarks property of their respective owners.{" "}
+          <div className="flex items-center justify-center gap-7">
+            <a href="mailto:nlmnever2@gmail.com" target="_blank" rel="noopener noreferrer">
+              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                <SiGmail size={20} color="black"/>
+              </div>
+            </a>
+            <a href="https://github.com/Npvpr" target="_blank" rel="noopener noreferrer">
+              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                <FaGithub  size={25} color="black"/>
+              </div>
+            </a>
+            <a href="https://www.linkedin.com/in/naing-lin-maung/" target="_blank" rel="noopener noreferrer">
+              <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
+                <FaLinkedin  size={24} color="black"/>
+              </div>
+            </a>
+          </div>
+          <div className="mt-5">
+            Copyright © 2025 Naing Lin Maung - All Rights Reserved. All content
+            and trademarks property of their respective owners.{" "}
+          </div>
         </footer>
       </body>
     </html>

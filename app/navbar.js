@@ -46,7 +46,7 @@ const Navbar = () => {
     { name: "HOME", href: "/" },
     { name: "PROJECTS", href: "/projects" },
     { name: "BLOGS", href: "/blogs" },
-    { name: "CV", href: home[0]?.file || ""},
+    { name: "CV", href: home[0]?.file || "" },
     { name: "CONTACT", href: "/contact" },
   ];
 
@@ -61,14 +61,22 @@ const Navbar = () => {
       {/* Desktop Menu */}
       <div className="hidden sm:flex gap-6">
         {navLinks.map((link) => (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={`hover:text-gray-400 relative inline-block text-white after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gray-400 after:transition-all after:duration-300 hover:after:w-full ${pathname === link.href ? "after:w-full" : ""
-              }`}
-          >
-            <span className="font-raleway">{link.name}</span>
-          </Link>
+          <div key={link.name}>
+            {link.name === "CV" ?
+              <a href={link.href} target="_blank" rel="noopener noreferrer" className={`hover:text-gray-400 relative inline-block text-white after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gray-400 after:transition-all after:duration-300 hover:after:w-full ${pathname === link.href ? "after:w-full" : ""
+                }`}>
+                CV
+              </a>
+              :
+              <Link
+                key={link.name}
+                href={link.href}
+                className={`hover:text-gray-400 relative inline-block text-white after:content-[''] after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-gray-400 after:transition-all after:duration-300 hover:after:w-full ${pathname === link.href ? "after:w-full" : ""
+                  }`}
+              >
+                <span className="font-raleway">{link.name}</span>
+              </Link>}
+          </ div>
         ))}
       </div>
 

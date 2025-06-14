@@ -1,4 +1,4 @@
-const LoadingScreen = ({className=""}) => {
+const LoadingScreen = ({ className = "" }) => {
     return (
         <div className={`flex items-center justify-center ${className}`}>
             <div className="spinner">

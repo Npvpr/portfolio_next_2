@@ -46,7 +46,7 @@ export default function ProjectsPage() {
     <div className="max-w-full sm:mx-20 p-6">
       <h1 className="text-4xl font-bold pr-4 mb-8"> Projects </h1>
       {loading ? (
-        <LoadingScreen className="min-h-screen"/>
+        <LoadingScreen />
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 ">
           {projects.map((project, i) => (
@@ -56,7 +56,7 @@ export default function ProjectsPage() {
               className="bg-zinc-800 rounded-2xl overflow-hidden shadow-md hover:shadow-lg transition"
             >
               <div className="grid grid-cols-1">
-                {isLoading && <LoadingScreen />}
+                {isLoading && <LoadingScreen className="h-40 -mb-40"/>}
                 {project.image && (
                   <Image
                     src={project.image}

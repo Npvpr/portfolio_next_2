@@ -5,10 +5,10 @@ import { Client } from '@notionhq/client';
 import { languages } from 'prismjs';
 
 const notion = new Client({
-  auth: process.env.NEXT_PUBLIC_NOTION_TOKEN, // ⚠️ Keep secret in production
+  auth: process.env.NOTION_TOKEN, // ⚠️ Keep secret in production
 });
 
-const databaseId = process.env.NEXT_PUBLIC_NOTION_BLOGS_DATABASE_ID;
+const databaseId = process.env.NOTION_BLOGS_DATABASE_ID;
 
 export async function GET() {
   try {
